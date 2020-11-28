@@ -1,0 +1,1184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ELECTROMOBILEDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="RUC" />
+    </Key>
+    <Property Name="RUC" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PNombre_rep" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SNombre_rep" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PApell_rep" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SApell_rep" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Correo" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="Telefono" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Name="Empresa" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Tipo_empresa" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="Tipo_Servicio" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+    <Property Name="Direccion" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Reparacion" Relationship="Self.FK__Reparacio__ID_Cl__4E88ABD4" FromRole="Cliente" ToRole="Reparacion" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK__Venta__ID_Client__48CFD27E" FromRole="Cliente" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Compra">
+    <Key>
+      <PropertyRef Name="ID_Compra" />
+    </Key>
+    <Property Name="ID_Compra" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Id_Proveedor" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Total_Compra" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+    <NavigationProperty Name="Proveedor" Relationship="Self.FK__Compra__Id_Prove__4222D4EF" FromRole="Compra" ToRole="Proveedor" />
+    <NavigationProperty Name="Detalle_compra" Relationship="Self.FK__Detalle_c__ID_Co__44FF419A" FromRole="Compra" ToRole="Detalle_compra" />
+    <NavigationProperty Name="DevolucionCompra" Relationship="Self.FK__Devolucio__ID_Co__5535A963" FromRole="Compra" ToRole="DevolucionCompra" />
+  </EntityType>
+  <EntityType Name="Detalle_compra">
+    <Key>
+      <PropertyRef Name="ID_Compra" />
+      <PropertyRef Name="ID_Pieza" />
+    </Key>
+    <Property Name="ID_Compra" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID_Pieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="precio" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="subtotal" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+    <NavigationProperty Name="Compra" Relationship="Self.FK__Detalle_c__ID_Co__44FF419A" FromRole="Detalle_compra" ToRole="Compra" />
+    <NavigationProperty Name="Pieza" Relationship="Self.FK__Detalle_c__ID_Pi__45F365D3" FromRole="Detalle_compra" ToRole="Pieza" />
+  </EntityType>
+  <EntityType Name="DetalleDevCompra">
+    <Key>
+      <PropertyRef Name="ID_DevolucionCompra" />
+      <PropertyRef Name="ID_Pieza" />
+    </Key>
+    <Property Name="ID_DevolucionCompra" Type="Int32" Nullable="false" />
+    <Property Name="ID_Pieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DevolucionCompra" Relationship="Self.FK__DetalleDe__ID_De__5812160E" FromRole="DetalleDevCompra" ToRole="DevolucionCompra" />
+    <NavigationProperty Name="Pieza" Relationship="Self.FK__DetalleDe__ID_Pi__59063A47" FromRole="DetalleDevCompra" ToRole="Pieza" />
+  </EntityType>
+  <EntityType Name="DetalleReparacion">
+    <Key>
+      <PropertyRef Name="ID_Reparacion" />
+      <PropertyRef Name="ID_Pieza" />
+    </Key>
+    <Property Name="ID_Reparacion" Type="Int32" Nullable="false" />
+    <Property Name="ID_Pieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Precio" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Subtotal" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+    <NavigationProperty Name="Pieza" Relationship="Self.FK__DetalleRe__ID_Pi__52593CB8" FromRole="DetalleReparacion" ToRole="Pieza" />
+    <NavigationProperty Name="Reparacion" Relationship="Self.FK__DetalleRe__ID_Re__5165187F" FromRole="DetalleReparacion" ToRole="Reparacion" />
+  </EntityType>
+  <EntityType Name="DevolucionCompra">
+    <Key>
+      <PropertyRef Name="ID_DevolucionCompras" />
+    </Key>
+    <Property Name="ID_DevolucionCompras" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Compra" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Total" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+    <NavigationProperty Name="Compra" Relationship="Self.FK__Devolucio__ID_Co__5535A963" FromRole="DevolucionCompra" ToRole="Compra" />
+    <NavigationProperty Name="DetalleDevCompra" Relationship="Self.FK__DetalleDe__ID_De__5812160E" FromRole="DevolucionCompra" ToRole="DetalleDevCompra" />
+  </EntityType>
+  <EntityType Name="DevolucionVenta">
+    <Key>
+      <PropertyRef Name="ID_DevVenta" />
+    </Key>
+    <Property Name="ID_DevVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Venta" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+    <NavigationProperty Name="DetalleDevVenta" Relationship="Self.FK__DetalleDe__ID_De__5DCAEF64" FromRole="DevolucionVenta" ToRole="DetalleDevVenta" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK__Devolucio__ID_Ve__5BE2A6F2" FromRole="DevolucionVenta" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Estado_uso">
+    <Key>
+      <PropertyRef Name="ID_Estado" />
+    </Key>
+    <Property Name="ID_Estado" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="55" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Pieza" Relationship="Self.FK__Pieza__ID_Estado__31EC6D26" FromRole="Estado_uso" ToRole="Pieza" />
+  </EntityType>
+  <EntityType Name="Lester_pieza">
+    <Key>
+      <PropertyRef Name="ID_LesterPieza" />
+    </Key>
+    <Property Name="ID_Pieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID_LesterPieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Pieza" Relationship="Self.FK__Lester_pi__ID_Pi__3C69FB99" FromRole="Lester_pieza" ToRole="Pieza" />
+  </EntityType>
+  <EntityType Name="Pieza">
+    <Key>
+      <PropertyRef Name="ID_Pieza" />
+    </Key>
+    <Property Name="ID_Pieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID_Proveedor" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="ID_Estado" Type="Byte" />
+    <Property Name="ID_TipoPiezas" Type="Byte" Nullable="false" />
+    <Property Name="SRCImagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SRCImagenCir" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SRCImagenCorr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="estante" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="tension" Type="Byte" />
+    <Property Name="precio" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="circuito" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dientes" Type="Byte" />
+    <Property Name="recuento_terminales" Type="Byte" />
+    <Property Name="voltaje" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="Fabricante" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Detalle_compra" Relationship="Self.FK__Detalle_c__ID_Pi__45F365D3" FromRole="Pieza" ToRole="Detalle_compra" />
+    <NavigationProperty Name="DetalleDevCompra" Relationship="Self.FK__DetalleDe__ID_Pi__59063A47" FromRole="Pieza" ToRole="DetalleDevCompra" />
+    <NavigationProperty Name="DetalleReparacion" Relationship="Self.FK__DetalleRe__ID_Pi__52593CB8" FromRole="Pieza" ToRole="DetalleReparacion" />
+    <NavigationProperty Name="Estado_uso" Relationship="Self.FK__Pieza__ID_Estado__31EC6D26" FromRole="Pieza" ToRole="Estado_uso" />
+    <NavigationProperty Name="Lester_pieza" Relationship="Self.FK__Lester_pi__ID_Pi__3C69FB99" FromRole="Pieza" ToRole="Lester_pieza" />
+    <NavigationProperty Name="Detalle_venta" Relationship="Self.FK__Detalle_v__ID_Pi__4BAC3F29" FromRole="Pieza" ToRole="Detalle_venta" />
+    <NavigationProperty Name="DetalleDevVenta" Relationship="Self.FK__DetalleDe__ID_Pi__5EBF139D" FromRole="Pieza" ToRole="DetalleDevVenta" />
+    <NavigationProperty Name="Proveedor" Relationship="Self.FK__Pieza__ID_Provee__30F848ED" FromRole="Pieza" ToRole="Proveedor" />
+    <NavigationProperty Name="Tipo_piezas" Relationship="Self.FK__Pieza__ID_TipoPi__32E0915F" FromRole="Pieza" ToRole="Tipo_piezas" />
+    <NavigationProperty Name="Sustituto_piezas" Relationship="Self.FK__Sustituto__ID_Pi__398D8EEE" FromRole="Pieza" ToRole="Sustituto_piezas" />
+    <NavigationProperty Name="Vehiculo" Relationship="Self.PiezasVehiculos" FromRole="Pieza" ToRole="Vehiculo" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="ID_Proveedor" />
+    </Key>
+    <Property Name="ID_Proveedor" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Apellido" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Empresa" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="Correo" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="Telefono" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="135" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID_TipoProveedor" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Compra" Relationship="Self.FK__Compra__Id_Prove__4222D4EF" FromRole="Proveedor" ToRole="Compra" />
+    <NavigationProperty Name="Pieza" Relationship="Self.FK__Pieza__ID_Provee__30F848ED" FromRole="Proveedor" ToRole="Pieza" />
+    <NavigationProperty Name="Tipo_proveedor" Relationship="Self.FK__Proveedor__ID_Ti__2A4B4B5E" FromRole="Proveedor" ToRole="Tipo_proveedor" />
+  </EntityType>
+  <EntityType Name="Reparacion">
+    <Key>
+      <PropertyRef Name="ID_Reparacion" />
+    </Key>
+    <Property Name="ID_Reparacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Cliente" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+    <Property Name="FechaIni" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaFinal" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Total" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK__Reparacio__ID_Cl__4E88ABD4" FromRole="Reparacion" ToRole="Cliente" />
+    <NavigationProperty Name="DetalleReparacion" Relationship="Self.FK__DetalleRe__ID_Re__5165187F" FromRole="Reparacion" ToRole="DetalleReparacion" />
+  </EntityType>
+  <EntityType Name="Sustituto_piezas">
+    <Key>
+      <PropertyRef Name="ID_Sustituto" />
+    </Key>
+    <Property Name="ID_Pieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID_Sustituto" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Pieza" Relationship="Self.FK__Sustituto__ID_Pi__398D8EEE" FromRole="Sustituto_piezas" ToRole="Pieza" />
+  </EntityType>
+  <EntityType Name="Tipo_piezas">
+    <Key>
+      <PropertyRef Name="ID_TipoPiezas" />
+    </Key>
+    <Property Name="ID_TipoPiezas" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Pieza" Relationship="Self.FK__Pieza__ID_TipoPi__32E0915F" FromRole="Tipo_piezas" ToRole="Pieza" />
+  </EntityType>
+  <EntityType Name="Tipo_proveedor">
+    <Key>
+      <PropertyRef Name="ID_TipoProveedor" />
+    </Key>
+    <Property Name="ID_TipoProveedor" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Proveedor" Relationship="Self.FK__Proveedor__ID_Ti__2A4B4B5E" FromRole="Tipo_proveedor" ToRole="Proveedor" />
+  </EntityType>
+  <EntityType Name="Vehiculo">
+    <Key>
+      <PropertyRef Name="ID_Vehiculo" />
+    </Key>
+    <Property Name="ID_Vehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombres" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Años" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Pieza" Relationship="Self.PiezasVehiculos" FromRole="Vehiculo" ToRole="Pieza" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="ID_Venta" />
+    </Key>
+    <Property Name="ID_Venta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Cliente" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha_Inicial" Type="DateTime" Precision="3" />
+    <Property Name="FechaEntrega" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Estado" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Total" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK__Venta__ID_Client__48CFD27E" FromRole="Venta" ToRole="Cliente" />
+    <NavigationProperty Name="DevolucionVenta" Relationship="Self.FK__Devolucio__ID_Ve__5BE2A6F2" FromRole="Venta" ToRole="DevolucionVenta" />
+    <NavigationProperty Name="Detalle_venta" Relationship="Self.FK__Detalle_v__ID_Ve__4AB81AF0" FromRole="Venta" ToRole="Detalle_venta" />
+  </EntityType>
+  <EntityType Name="Detalle_venta">
+    <Key>
+      <PropertyRef Name="ID_Pieza" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="subtotal" />
+    </Key>
+    <Property Name="ID_Venta" Type="Int32" />
+    <Property Name="ID_Pieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="subtotal" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+    <NavigationProperty Name="Pieza" Relationship="Self.FK__Detalle_v__ID_Pi__4BAC3F29" FromRole="Detalle_venta" ToRole="Pieza" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK__Detalle_v__ID_Ve__4AB81AF0" FromRole="Detalle_venta" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="DetalleDevVenta">
+    <Key>
+      <PropertyRef Name="ID_DevVenta" />
+      <PropertyRef Name="ID_Pieza" />
+      <PropertyRef Name="CantPieza" />
+    </Key>
+    <Property Name="ID_DevVenta" Type="Int32" Nullable="false" />
+    <Property Name="ID_Pieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CantPieza" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DevolucionVenta" Relationship="Self.FK__DetalleDe__ID_De__5DCAEF64" FromRole="DetalleDevVenta" ToRole="DevolucionVenta" />
+    <NavigationProperty Name="Pieza" Relationship="Self.FK__DetalleDe__ID_Pi__5EBF139D" FromRole="DetalleDevVenta" ToRole="Pieza" />
+  </EntityType>
+  <EntityType Name="ReportesVentasPorCliente">
+    <Key>
+      <PropertyRef Name="ID_Venta" />
+      <PropertyRef Name="Codigo_cliente" />
+      <PropertyRef Name="Empresa" />
+      <PropertyRef Name="Nombre_representante" />
+      <PropertyRef Name="fecha" />
+    </Key>
+    <Property Name="ID_Venta" Type="Int32" Nullable="false" />
+    <Property Name="Codigo_cliente" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Empresa" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nombre_representante" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="precio" Type="Decimal" Precision="38" Scale="3" />
+    <Property Name="Subtotal" Type="Decimal" Precision="38" Scale="3" />
+  </EntityType>
+  <EntityType Name="ReportesVentasPorPiezas">
+    <Key>
+      <PropertyRef Name="ID_Venta" />
+      <PropertyRef Name="Codigo_pieza" />
+      <PropertyRef Name="Nombre_pieza" />
+    </Key>
+    <Property Name="ID_Venta" Type="Int32" Nullable="false" />
+    <Property Name="Codigo_pieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nombre_pieza" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Subtotal" Type="Decimal" Precision="38" Scale="3" />
+  </EntityType>
+  <Association Name="FK__Reparacio__ID_Cl__4E88ABD4">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="Reparacion" Type="Self.Reparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="RUC" />
+      </Principal>
+      <Dependent Role="Reparacion">
+        <PropertyRef Name="ID_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Venta__ID_Client__48CFD27E">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="RUC" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="ID_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Compra__Id_Prove__4222D4EF">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+    <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="ID_Proveedor" />
+      </Principal>
+      <Dependent Role="Compra">
+        <PropertyRef Name="Id_Proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalle_c__ID_Co__44FF419A">
+    <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+    <End Role="Detalle_compra" Type="Self.Detalle_compra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compra">
+        <PropertyRef Name="ID_Compra" />
+      </Principal>
+      <Dependent Role="Detalle_compra">
+        <PropertyRef Name="ID_Compra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Devolucio__ID_Co__5535A963">
+    <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+    <End Role="DevolucionCompra" Type="Self.DevolucionCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compra">
+        <PropertyRef Name="ID_Compra" />
+      </Principal>
+      <Dependent Role="DevolucionCompra">
+        <PropertyRef Name="ID_Compra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalle_c__ID_Pi__45F365D3">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="Detalle_compra" Type="Self.Detalle_compra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="Detalle_compra">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleDe__ID_De__5812160E">
+    <End Role="DevolucionCompra" Type="Self.DevolucionCompra" Multiplicity="1" />
+    <End Role="DetalleDevCompra" Type="Self.DetalleDevCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DevolucionCompra">
+        <PropertyRef Name="ID_DevolucionCompras" />
+      </Principal>
+      <Dependent Role="DetalleDevCompra">
+        <PropertyRef Name="ID_DevolucionCompra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleDe__ID_Pi__59063A47">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="DetalleDevCompra" Type="Self.DetalleDevCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="DetalleDevCompra">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleRe__ID_Pi__52593CB8">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="DetalleReparacion" Type="Self.DetalleReparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="DetalleReparacion">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleRe__ID_Re__5165187F">
+    <End Role="Reparacion" Type="Self.Reparacion" Multiplicity="1" />
+    <End Role="DetalleReparacion" Type="Self.DetalleReparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reparacion">
+        <PropertyRef Name="ID_Reparacion" />
+      </Principal>
+      <Dependent Role="DetalleReparacion">
+        <PropertyRef Name="ID_Reparacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleDe__ID_De__5DCAEF64">
+    <End Role="DevolucionVenta" Type="Self.DevolucionVenta" Multiplicity="1" />
+    <End Role="DetalleDevVenta" Type="Self.DetalleDevVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DevolucionVenta">
+        <PropertyRef Name="ID_DevVenta" />
+      </Principal>
+      <Dependent Role="DetalleDevVenta">
+        <PropertyRef Name="ID_DevVenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Devolucio__ID_Ve__5BE2A6F2">
+    <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+    <End Role="DevolucionVenta" Type="Self.DevolucionVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="ID_Venta" />
+      </Principal>
+      <Dependent Role="DevolucionVenta">
+        <PropertyRef Name="ID_Venta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pieza__ID_Estado__31EC6D26">
+    <End Role="Estado_uso" Type="Self.Estado_uso" Multiplicity="0..1" />
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado_uso">
+        <PropertyRef Name="ID_Estado" />
+      </Principal>
+      <Dependent Role="Pieza">
+        <PropertyRef Name="ID_Estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lester_pi__ID_Pi__3C69FB99">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="Lester_pieza" Type="Self.Lester_pieza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="Lester_pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalle_v__ID_Pi__4BAC3F29">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="Detalle_venta" Type="Self.Detalle_venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="Detalle_venta">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleDe__ID_Pi__5EBF139D">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="DetalleDevVenta" Type="Self.DetalleDevVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="DetalleDevVenta">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pieza__ID_Provee__30F848ED">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="ID_Proveedor" />
+      </Principal>
+      <Dependent Role="Pieza">
+        <PropertyRef Name="ID_Proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pieza__ID_TipoPi__32E0915F">
+    <End Role="Tipo_piezas" Type="Self.Tipo_piezas" Multiplicity="1" />
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_piezas">
+        <PropertyRef Name="ID_TipoPiezas" />
+      </Principal>
+      <Dependent Role="Pieza">
+        <PropertyRef Name="ID_TipoPiezas" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sustituto__ID_Pi__398D8EEE">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="Sustituto_piezas" Type="Self.Sustituto_piezas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="Sustituto_piezas">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Proveedor__ID_Ti__2A4B4B5E">
+    <End Role="Tipo_proveedor" Type="Self.Tipo_proveedor" Multiplicity="1" />
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_proveedor">
+        <PropertyRef Name="ID_TipoProveedor" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="ID_TipoProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalle_v__ID_Ve__4AB81AF0">
+    <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+    <End Role="Detalle_venta" Type="Self.Detalle_venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="ID_Venta" />
+      </Principal>
+      <Dependent Role="Detalle_venta">
+        <PropertyRef Name="ID_Venta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PiezasVehiculos">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="*" />
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="ELECTROMOBILEModel" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="Compra" EntityType="Self.Compra" />
+    <EntitySet Name="Detalle_compra" EntityType="Self.Detalle_compra" />
+    <EntitySet Name="DetalleDevCompra" EntityType="Self.DetalleDevCompra" />
+    <EntitySet Name="DetalleReparacion" EntityType="Self.DetalleReparacion" />
+    <EntitySet Name="DevolucionCompra" EntityType="Self.DevolucionCompra" />
+    <EntitySet Name="DevolucionVenta" EntityType="Self.DevolucionVenta" />
+    <EntitySet Name="Estado_uso" EntityType="Self.Estado_uso" />
+    <EntitySet Name="Lester_pieza" EntityType="Self.Lester_pieza" />
+    <EntitySet Name="Pieza" EntityType="Self.Pieza" />
+    <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+    <EntitySet Name="Reparacion" EntityType="Self.Reparacion" />
+    <EntitySet Name="Sustituto_piezas" EntityType="Self.Sustituto_piezas" />
+    <EntitySet Name="Tipo_piezas" EntityType="Self.Tipo_piezas" />
+    <EntitySet Name="Tipo_proveedor" EntityType="Self.Tipo_proveedor" />
+    <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" />
+    <EntitySet Name="Venta" EntityType="Self.Venta" />
+    <EntitySet Name="Detalle_venta" EntityType="Self.Detalle_venta" />
+    <EntitySet Name="DetalleDevVenta" EntityType="Self.DetalleDevVenta" />
+    <EntitySet Name="ReportesVentasPorCliente" EntityType="Self.ReportesVentasPorCliente" />
+    <EntitySet Name="ReportesVentasPorPiezas" EntityType="Self.ReportesVentasPorPiezas" />
+    <AssociationSet Name="FK__Reparacio__ID_Cl__4E88ABD4" Association="Self.FK__Reparacio__ID_Cl__4E88ABD4">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Reparacion" EntitySet="Reparacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Venta__ID_Client__48CFD27E" Association="Self.FK__Venta__ID_Client__48CFD27E">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Compra__Id_Prove__4222D4EF" Association="Self.FK__Compra__Id_Prove__4222D4EF">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Compra" EntitySet="Compra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalle_c__ID_Co__44FF419A" Association="Self.FK__Detalle_c__ID_Co__44FF419A">
+      <End Role="Compra" EntitySet="Compra" />
+      <End Role="Detalle_compra" EntitySet="Detalle_compra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Devolucio__ID_Co__5535A963" Association="Self.FK__Devolucio__ID_Co__5535A963">
+      <End Role="Compra" EntitySet="Compra" />
+      <End Role="DevolucionCompra" EntitySet="DevolucionCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalle_c__ID_Pi__45F365D3" Association="Self.FK__Detalle_c__ID_Pi__45F365D3">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="Detalle_compra" EntitySet="Detalle_compra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleDe__ID_De__5812160E" Association="Self.FK__DetalleDe__ID_De__5812160E">
+      <End Role="DevolucionCompra" EntitySet="DevolucionCompra" />
+      <End Role="DetalleDevCompra" EntitySet="DetalleDevCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleDe__ID_Pi__59063A47" Association="Self.FK__DetalleDe__ID_Pi__59063A47">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="DetalleDevCompra" EntitySet="DetalleDevCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleRe__ID_Pi__52593CB8" Association="Self.FK__DetalleRe__ID_Pi__52593CB8">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="DetalleReparacion" EntitySet="DetalleReparacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleRe__ID_Re__5165187F" Association="Self.FK__DetalleRe__ID_Re__5165187F">
+      <End Role="Reparacion" EntitySet="Reparacion" />
+      <End Role="DetalleReparacion" EntitySet="DetalleReparacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleDe__ID_De__5DCAEF64" Association="Self.FK__DetalleDe__ID_De__5DCAEF64">
+      <End Role="DevolucionVenta" EntitySet="DevolucionVenta" />
+      <End Role="DetalleDevVenta" EntitySet="DetalleDevVenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Devolucio__ID_Ve__5BE2A6F2" Association="Self.FK__Devolucio__ID_Ve__5BE2A6F2">
+      <End Role="Venta" EntitySet="Venta" />
+      <End Role="DevolucionVenta" EntitySet="DevolucionVenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pieza__ID_Estado__31EC6D26" Association="Self.FK__Pieza__ID_Estado__31EC6D26">
+      <End Role="Estado_uso" EntitySet="Estado_uso" />
+      <End Role="Pieza" EntitySet="Pieza" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lester_pi__ID_Pi__3C69FB99" Association="Self.FK__Lester_pi__ID_Pi__3C69FB99">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="Lester_pieza" EntitySet="Lester_pieza" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalle_v__ID_Pi__4BAC3F29" Association="Self.FK__Detalle_v__ID_Pi__4BAC3F29">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="Detalle_venta" EntitySet="Detalle_venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleDe__ID_Pi__5EBF139D" Association="Self.FK__DetalleDe__ID_Pi__5EBF139D">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="DetalleDevVenta" EntitySet="DetalleDevVenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pieza__ID_Provee__30F848ED" Association="Self.FK__Pieza__ID_Provee__30F848ED">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Pieza" EntitySet="Pieza" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pieza__ID_TipoPi__32E0915F" Association="Self.FK__Pieza__ID_TipoPi__32E0915F">
+      <End Role="Tipo_piezas" EntitySet="Tipo_piezas" />
+      <End Role="Pieza" EntitySet="Pieza" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sustituto__ID_Pi__398D8EEE" Association="Self.FK__Sustituto__ID_Pi__398D8EEE">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="Sustituto_piezas" EntitySet="Sustituto_piezas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Proveedor__ID_Ti__2A4B4B5E" Association="Self.FK__Proveedor__ID_Ti__2A4B4B5E">
+      <End Role="Tipo_proveedor" EntitySet="Tipo_proveedor" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalle_v__ID_Ve__4AB81AF0" Association="Self.FK__Detalle_v__ID_Ve__4AB81AF0">
+      <End Role="Venta" EntitySet="Venta" />
+      <End Role="Detalle_venta" EntitySet="Detalle_venta" />
+    </AssociationSet>
+    <AssociationSet Name="PiezasVehiculos" Association="Self.PiezasVehiculos">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+    </AssociationSet>
+    <FunctionImport Name="AgregarDetalleCompra" ReturnType="Collection(ELECTROMOBILEDBModel.AgregarDetalleCompra_Result)">
+      <Parameter Name="IC" Mode="In" Type="String" />
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="PC" Mode="In" Type="Decimal" />
+      <Parameter Name="Can" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AgregarDetalleVenta">
+      <Parameter Name="ID_Venta" Mode="In" Type="Int32" />
+      <Parameter Name="ID_Pieza" Mode="In" Type="String" />
+      <Parameter Name="cantidad" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="BuscarCliente" ReturnType="Collection(ELECTROMOBILEDBModel.BuscarCliente_Result)">
+      <Parameter Name="Valor" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="BuscarCompra" ReturnType="Collection(ELECTROMOBILEDBModel.BuscarCompra_Result)">
+      <Parameter Name="IC" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="BuscarDetalle_venta" ReturnType="Collection(ELECTROMOBILEDBModel.BuscarDetalle_venta_Result)">
+      <Parameter Name="IVB" Mode="In" Type="Int32" />
+      <Parameter Name="IPB" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="BuscarReparacion" ReturnType="Collection(ELECTROMOBILEDBModel.BuscarReparacion_Result)">
+      <Parameter Name="IDR" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="BuscarVenta" ReturnType="Collection(ELECTROMOBILEDBModel.BuscarVenta_Result)">
+      <Parameter Name="ID_Venta" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CrearCompra" ReturnType="Collection(ELECTROMOBILEDBModel.CrearCompra_Result)">
+      <Parameter Name="IC" Mode="In" Type="String" />
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="EditarCliente">
+      <Parameter Name="RUC" Mode="In" Type="String" />
+      <Parameter Name="Pn" Mode="In" Type="String" />
+      <Parameter Name="Sn" Mode="In" Type="String" />
+      <Parameter Name="Pa" Mode="In" Type="String" />
+      <Parameter Name="Sa" Mode="In" Type="String" />
+      <Parameter Name="CorC" Mode="In" Type="String" />
+      <Parameter Name="TelC" Mode="In" Type="String" />
+      <Parameter Name="TipoEmp" Mode="In" Type="String" />
+      <Parameter Name="TipoSer" Mode="In" Type="String" />
+      <Parameter Name="DirC" Mode="In" Type="String" />
+      <Parameter Name="EMP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EditarDetalle_venta" ReturnType="Collection(ELECTROMOBILEDBModel.EditarDetalle_venta_Result)">
+      <Parameter Name="IVB" Mode="In" Type="Int32" />
+      <Parameter Name="IPB" Mode="In" Type="String" />
+      <Parameter Name="cant" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EditarDetalleCompra" ReturnType="Collection(ELECTROMOBILEDBModel.EditarDetalleCompra_Result)">
+      <Parameter Name="ICB" Mode="In" Type="String" />
+      <Parameter Name="IPB" Mode="In" Type="String" />
+      <Parameter Name="PC" Mode="In" Type="Decimal" />
+      <Parameter Name="Can" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EditarDetalleDevCompra" ReturnType="Collection(ELECTROMOBILEDBModel.EditarDetalleDevCompra_Result)">
+      <Parameter Name="ID_DevCompra" Mode="In" Type="Int32" />
+      <Parameter Name="IDP" Mode="In" Type="String" />
+      <Parameter Name="cant_Edit" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EditarDetalleDevVenta" ReturnType="Collection(ELECTROMOBILEDBModel.EditarDetalleDevVenta_Result)">
+      <Parameter Name="ID_DevVenta" Mode="In" Type="Int32" />
+      <Parameter Name="IDP" Mode="In" Type="String" />
+      <Parameter Name="cant_Edit" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EditarDetalleReparacion">
+      <Parameter Name="IR" Mode="In" Type="Int32" />
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="PR" Mode="In" Type="Decimal" />
+      <Parameter Name="CanR" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EditarDevolucionDeCompra">
+      <Parameter Name="IDV" Mode="In" Type="Int32" />
+      <Parameter Name="Desc" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EditarDevVenta">
+      <Parameter Name="IDV" Mode="In" Type="Int32" />
+      <Parameter Name="Desc" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EditarPieza">
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="IPrin" Mode="In" Type="String" />
+      <Parameter Name="ICir" Mode="In" Type="String" />
+      <Parameter Name="ICor" Mode="In" Type="String" />
+      <Parameter Name="Est" Mode="In" Type="String" />
+      <Parameter Name="Ten" Mode="In" Type="Byte" />
+      <Parameter Name="Pre" Mode="In" Type="Decimal" />
+      <Parameter Name="Cant" Mode="In" Type="Int32" />
+      <Parameter Name="Cir" Mode="In" Type="String" />
+      <Parameter Name="Di" Mode="In" Type="Byte" />
+      <Parameter Name="RecTer" Mode="In" Type="Byte" />
+      <Parameter Name="Volt" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EditarProveedor">
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="Np" Mode="In" Type="String" />
+      <Parameter Name="Ap" Mode="In" Type="String" />
+      <Parameter Name="Emp" Mode="In" Type="String" />
+      <Parameter Name="Cor" Mode="In" Type="String" />
+      <Parameter Name="Tel" Mode="In" Type="String" />
+      <Parameter Name="Dir" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EditarReparacion" ReturnType="Collection(ELECTROMOBILEDBModel.EditarReparacion_Result)">
+      <Parameter Name="IDR" Mode="In" Type="Int32" />
+      <Parameter Name="IDC" Mode="In" Type="String" />
+      <Parameter Name="FECHAFIN" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="EditarSustitutoPieza" ReturnType="Collection(ELECTROMOBILEDBModel.EditarSustitutoPieza_Result)">
+      <Parameter Name="IDPB" Mode="In" Type="String" />
+      <Parameter Name="IDS" Mode="In" Type="String" />
+      <Parameter Name="IDSEdit" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EditarVehiculo" ReturnType="Collection(ELECTROMOBILEDBModel.EditarVehiculo_Result)">
+      <Parameter Name="IDVB" Mode="In" Type="Int32" />
+      <Parameter Name="NombEdit" Mode="In" Type="String" />
+      <Parameter Name="AniosEdit" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EditarVenta">
+      <Parameter Name="ID_Venta" Mode="In" Type="Int32" />
+      <Parameter Name="RUC" Mode="In" Type="String" />
+      <Parameter Name="FechaEntrega" Mode="In" Type="DateTime" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarCliente">
+      <Parameter Name="RUC" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarDetalle_venta">
+      <Parameter Name="IV" Mode="In" Type="Int32" />
+      <Parameter Name="IP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarDetalleDeCompra">
+      <Parameter Name="IC" Mode="In" Type="String" />
+      <Parameter Name="IP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarDetDevCompra">
+      <Parameter Name="ID_DevCompra" Mode="In" Type="Int32" />
+      <Parameter Name="IDP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarPieza">
+      <Parameter Name="IdPi" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarPiezaEnVehiculo">
+      <Parameter Name="IV" Mode="In" Type="Int32" />
+      <Parameter Name="IP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarProveedor">
+      <Parameter Name="IP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarSustitutoPieza">
+      <Parameter Name="IDPB" Mode="In" Type="String" />
+      <Parameter Name="IDSB" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarCliente">
+      <Parameter Name="RUC" Mode="In" Type="String" />
+      <Parameter Name="Pn" Mode="In" Type="String" />
+      <Parameter Name="Sn" Mode="In" Type="String" />
+      <Parameter Name="Pa" Mode="In" Type="String" />
+      <Parameter Name="Sa" Mode="In" Type="String" />
+      <Parameter Name="CorC" Mode="In" Type="String" />
+      <Parameter Name="TelC" Mode="In" Type="String" />
+      <Parameter Name="TipoEmp" Mode="In" Type="String" />
+      <Parameter Name="TipoSer" Mode="In" Type="String" />
+      <Parameter Name="DirC" Mode="In" Type="String" />
+      <Parameter Name="Emp" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarDetalleDevCompra" ReturnType="Collection(ELECTROMOBILEDBModel.InsertarDetalleDevCompra_Result)">
+      <Parameter Name="IDC" Mode="In" Type="Int32" />
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="Can" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarDetalleDevVenta" ReturnType="Collection(ELECTROMOBILEDBModel.InsertarDetalleDevVenta_Result)">
+      <Parameter Name="IDV" Mode="In" Type="Int32" />
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="Can" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarDetalleReparacion" ReturnType="Collection(ELECTROMOBILEDBModel.InsertarDetalleReparacion_Result)">
+      <Parameter Name="IR" Mode="In" Type="Int32" />
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="PR" Mode="In" Type="Decimal" />
+      <Parameter Name="CanR" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarDevolucionCompra">
+      <Parameter Name="IC" Mode="In" Type="String" />
+      <Parameter Name="Desc" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarDevVenta">
+      <Parameter Name="IDV" Mode="In" Type="Int32" />
+      <Parameter Name="DESC" Mode="In" Type="String" />
+      <Parameter Name="FECHADEV" Mode="In" Type="DateTime" />
+      <Parameter Name="total" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarLester" ReturnType="Collection(ELECTROMOBILEDBModel.InsertarLester_Result)">
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="IL" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarPieza" ReturnType="Collection(ELECTROMOBILEDBModel.InsertarPieza_Result)">
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="IProv" Mode="In" Type="String" />
+      <Parameter Name="IE" Mode="In" Type="Byte" />
+      <Parameter Name="ITipo" Mode="In" Type="Byte" />
+      <Parameter Name="IPrin" Mode="In" Type="String" />
+      <Parameter Name="ICir" Mode="In" Type="String" />
+      <Parameter Name="ICor" Mode="In" Type="String" />
+      <Parameter Name="Est" Mode="In" Type="String" />
+      <Parameter Name="Ten" Mode="In" Type="Byte" />
+      <Parameter Name="Pre" Mode="In" Type="Decimal" />
+      <Parameter Name="Cant" Mode="In" Type="Int32" />
+      <Parameter Name="Cir" Mode="In" Type="String" />
+      <Parameter Name="Di" Mode="In" Type="Byte" />
+      <Parameter Name="RecTer" Mode="In" Type="Byte" />
+      <Parameter Name="Volt" Mode="In" Type="String" />
+      <Parameter Name="Fab" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarPiezaVehiculo" ReturnType="Collection(ELECTROMOBILEDBModel.InsertarPiezaVehiculo_Result)">
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="IV" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarProveedor" ReturnType="Collection(ELECTROMOBILEDBModel.InsertarProveedor_Result)">
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="Np" Mode="In" Type="String" />
+      <Parameter Name="Ap" Mode="In" Type="String" />
+      <Parameter Name="Emp" Mode="In" Type="String" />
+      <Parameter Name="Cor" Mode="In" Type="String" />
+      <Parameter Name="Tel" Mode="In" Type="String" />
+      <Parameter Name="Dir" Mode="In" Type="String" />
+      <Parameter Name="IT" Mode="In" Type="Byte" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarReparacion" ReturnType="Collection(ELECTROMOBILEDBModel.InsertarReparacion_Result)">
+      <Parameter Name="IDC" Mode="In" Type="String" />
+      <Parameter Name="FECHAFIN" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarSustituto">
+      <Parameter Name="IP" Mode="In" Type="String" />
+      <Parameter Name="IS" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarVehiculo" ReturnType="Collection(ELECTROMOBILEDBModel.InsertarVehiculo_Result)">
+      <Parameter Name="Nombres" Mode="In" Type="String" />
+      <Parameter Name="Anios" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarVenta">
+      <Parameter Name="RUC" Mode="In" Type="String" />
+      <Parameter Name="FechaEntrega" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="ListarCliente" ReturnType="Collection(ELECTROMOBILEDBModel.ListarCliente_Result)" />
+    <FunctionImport Name="ListarCompras" ReturnType="Collection(ELECTROMOBILEDBModel.ListarCompras_Result)" />
+    <FunctionImport Name="ListarDetalle_venta" ReturnType="Collection(ELECTROMOBILEDBModel.ListarDetalle_venta_Result)" />
+    <FunctionImport Name="ListarPiezas" ReturnType="Collection(ELECTROMOBILEDBModel.ListarPiezas_Result)" />
+    <FunctionImport Name="ListarPiezas_Susitutias" ReturnType="Collection(ELECTROMOBILEDBModel.ListarPiezas_Susitutias_Result)">
+      <Parameter Name="IDPB" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ListarReparacion" ReturnType="Collection(ELECTROMOBILEDBModel.ListarReparacion_Result)" />
+    <FunctionImport Name="ListarVehiculos" ReturnType="Collection(ELECTROMOBILEDBModel.ListarVehiculos_Result)" />
+    <FunctionImport Name="ListarVenta" ReturnType="Collection(ELECTROMOBILEDBModel.ListarVenta_Result)" />
+    <FunctionImport Name="ObtenerDetCompra" ReturnType="Collection(ELECTROMOBILEDBModel.ObtenerDetCompra_Result)">
+      <Parameter Name="IDC" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ObtenerDetVentas" ReturnType="Collection(ELECTROMOBILEDBModel.ObtenerDetVentas_Result)">
+      <Parameter Name="IDV" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="ReporteVentasPorPieza" EntityType="ELECTROMOBILEDBModel.ReporteVentasPorPieza" />
+    <FunctionImport Name="ListarDetDevCompra_DevCompra">
+      <Parameter Name="ID_DevCompra" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="AgregarDetalleCompra_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="BuscarCliente_Result">
+    <Property Type="String" Name="RUC" Nullable="false" MaxLength="14" />
+    <Property Type="String" Name="PNombre_rep" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="SNombre_rep" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="PApell_rep" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="SApell_rep" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Correo" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="8" />
+    <Property Type="String" Name="Empresa" Nullable="false" MaxLength="35" />
+    <Property Type="String" Name="Tipo_empresa" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Tipo_Servicio" Nullable="true" MaxLength="55" />
+    <Property Type="String" Name="Direccion" Nullable="true" MaxLength="55" />
+  </ComplexType>
+  <ComplexType Name="BuscarCompra_Result">
+    <Property Type="String" Name="ID_Compra" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="Id_Proveedor" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="Total_Compra" Nullable="false" Precision="9" Scale="3" />
+  </ComplexType>
+  <ComplexType Name="BuscarDetalle_venta_Result">
+    <Property Type="Int32" Name="ID_Venta" Nullable="true" />
+    <Property Type="String" Name="ID_Pieza" Nullable="false" MaxLength="35" />
+    <Property Type="Int32" Name="cantidad" Nullable="false" />
+    <Property Type="Decimal" Name="subtotal" Nullable="false" Precision="9" Scale="3" />
+  </ComplexType>
+  <ComplexType Name="BuscarReparacion_Result">
+    <Property Type="Int32" Name="ID_Reparacion" Nullable="false" />
+    <Property Type="String" Name="ID_Cliente" Nullable="true" MaxLength="14" />
+    <Property Type="DateTime" Name="FechaIni" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="Total" Nullable="false" Precision="9" Scale="3" />
+  </ComplexType>
+  <ComplexType Name="BuscarVenta_Result">
+    <Property Type="Int32" Name="ID_Venta" Nullable="false" />
+    <Property Type="String" Name="ID_Cliente" Nullable="true" MaxLength="14" />
+    <Property Type="DateTime" Name="Fecha_Inicial" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaEntrega" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Estado" Nullable="false" MaxLength="25" />
+    <Property Type="Decimal" Name="Total" Nullable="false" Precision="9" Scale="3" />
+  </ComplexType>
+  <ComplexType Name="CrearCompra_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="EditarDetalle_venta_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="EditarDetalleCompra_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="EditarDetalleDevCompra_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="EditarDetalleDevVenta_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="EditarReparacion_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="EditarSustitutoPieza_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="EditarVehiculo_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="InsertarDetalleDevCompra_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="InsertarDetalleDevVenta_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="InsertarDetalleReparacion_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="InsertarLester_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="InsertarPieza_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="InsertarPiezaVehiculo_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="InsertarProveedor_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="InsertarReparacion_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="InsertarVehiculo_Result">
+    <Property Type="String" Name="Column1" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+    <Property Type="Int32" Name="Column3" Nullable="true" />
+    <Property Type="Int32" Name="Column4" Nullable="true" />
+    <Property Type="Int32" Name="Column5" Nullable="true" />
+    <Property Type="String" Name="Column6" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="ListarCliente_Result">
+    <Property Type="String" Name="RUC" Nullable="false" MaxLength="14" />
+    <Property Type="String" Name="PNombre_rep" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="SNombre_rep" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="PApell_rep" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="SApell_rep" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Correo" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="8" />
+    <Property Type="String" Name="Empresa" Nullable="false" MaxLength="35" />
+    <Property Type="String" Name="Tipo_empresa" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Tipo_Servicio" Nullable="true" MaxLength="55" />
+    <Property Type="String" Name="Direccion" Nullable="true" MaxLength="55" />
+  </ComplexType>
+  <ComplexType Name="ListarCompras_Result">
+    <Property Type="String" Name="ID_Compra" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="Id_Proveedor" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="Total_Compra" Nullable="false" Precision="9" Scale="3" />
+  </ComplexType>
+  <ComplexType Name="ListarDetalle_venta_Result">
+    <Property Type="Int32" Name="ID_Venta" Nullable="true" />
+    <Property Type="String" Name="ID_Pieza" Nullable="false" MaxLength="35" />
+    <Property Type="Int32" Name="cantidad" Nullable="false" />
+    <Property Type="Decimal" Name="subtotal" Nullable="false" Precision="9" Scale="3" />
+  </ComplexType>
+  <ComplexType Name="ListarPiezas_Result">
+    <Property Type="String" Name="ID_Pieza" Nullable="false" MaxLength="35" />
+    <Property Type="String" Name="ID_Proveedor" Nullable="true" MaxLength="75" />
+    <Property Type="Byte" Name="ID_Estado" Nullable="true" />
+    <Property Type="Byte" Name="ID_TipoPiezas" Nullable="false" />
+    <Property Type="String" Name="SRCImagen" Nullable="true" />
+    <Property Type="String" Name="SRCImagenCir" Nullable="true" />
+    <Property Type="String" Name="SRCImagenCorr" Nullable="true" />
+    <Property Type="String" Name="estante" Nullable="true" MaxLength="5" />
+    <Property Type="Byte" Name="tension" Nullable="true" />
+    <Property Type="Decimal" Name="precio" Nullable="false" Precision="9" Scale="3" />
+    <Property Type="Int32" Name="cantidad" Nullable="false" />
+    <Property Type="String" Name="circuito" Nullable="true" />
+    <Property Type="Byte" Name="dientes" Nullable="true" />
+    <Property Type="Byte" Name="recuento_terminales" Nullable="true" />
+    <Property Type="String" Name="voltaje" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Fabricante" Nullable="true" MaxLength="75" />
+  </ComplexType>
+  <ComplexType Name="ListarPiezas_Susitutias_Result">
+    <Property Type="String" Name="ID_Pieza" Nullable="false" MaxLength="35" />
+    <Property Type="String" Name="ID_Sustituto" Nullable="false" MaxLength="35" />
+  </ComplexType>
+  <ComplexType Name="ListarReparacion_Result">
+    <Property Type="Int32" Name="ID_Reparacion" Nullable="false" />
+    <Property Type="String" Name="ID_Cliente" Nullable="true" MaxLength="14" />
+    <Property Type="DateTime" Name="FechaIni" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="FechaFinal" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="Total" Nullable="false" Precision="9" Scale="3" />
+  </ComplexType>
+  <ComplexType Name="ListarVehiculos_Result">
+    <Property Type="Int32" Name="ID_Vehiculo" Nullable="false" />
+    <Property Type="String" Name="Nombres" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="Años" Nullable="false" MaxLength="35" />
+  </ComplexType>
+  <ComplexType Name="ListarVenta_Result">
+    <Property Type="Int32" Name="ID_Venta" Nullable="false" />
+    <Property Type="String" Name="ID_Cliente" Nullable="true" MaxLength="14" />
+    <Property Type="DateTime" Name="Fecha_Inicial" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaEntrega" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Estado" Nullable="false" MaxLength="25" />
+    <Property Type="Decimal" Name="Total" Nullable="false" Precision="9" Scale="3" />
+  </ComplexType>
+  <ComplexType Name="ObtenerDetCompra_Result">
+    <Property Type="String" Name="ID_Compra" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="ID_Pieza" Nullable="false" MaxLength="35" />
+    <Property Type="Decimal" Name="precio" Nullable="false" Precision="9" Scale="3" />
+    <Property Type="Int32" Name="cantidad" Nullable="false" />
+    <Property Type="Decimal" Name="subtotal" Nullable="false" Precision="9" Scale="3" />
+  </ComplexType>
+  <ComplexType Name="ObtenerDetVentas_Result">
+    <Property Type="Int32" Name="ID_Venta" Nullable="true" />
+    <Property Type="String" Name="ID_Pieza" Nullable="false" MaxLength="35" />
+    <Property Type="Int32" Name="cantidad" Nullable="false" />
+    <Property Type="Decimal" Name="subtotal" Nullable="false" Precision="9" Scale="3" />
+  </ComplexType>
+  <EntityType Name="ReporteVentasPorPieza">
+    <Key>
+      <PropertyRef Name="ID_Venta" />
+      <PropertyRef Name="ID_Pieza" />
+      <PropertyRef Name="ID_TipoPiezas" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="precio" />
+      <PropertyRef Name="subtotal" />
+      <PropertyRef Name="FechaEntrega" />
+    </Key>
+    <Property Name="ID_Venta" Type="Int32" Nullable="false" />
+    <Property Name="ID_Pieza" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+    <Property Name="ID_TipoPiezas" Type="Byte" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="precio" Type="Decimal" Nullable="false" Precision="9" Scale="3" />
+    <Property Name="subtotal" Type="Decimal" Nullable="false" Precision="9" Scale="3" />
+    <Property Name="FechaEntrega" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+</Schema>

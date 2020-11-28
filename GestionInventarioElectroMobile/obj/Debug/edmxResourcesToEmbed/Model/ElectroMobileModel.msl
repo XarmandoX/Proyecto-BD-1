@@ -1,0 +1,663 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ELECTROMOBILEDBModelStoreContainer" CdmEntityContainer="ELECTROMOBILEModel">
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="RUC" ColumnName="RUC" />
+          <ScalarProperty Name="PNombre_rep" ColumnName="PNombre_rep" />
+          <ScalarProperty Name="SNombre_rep" ColumnName="SNombre_rep" />
+          <ScalarProperty Name="PApell_rep" ColumnName="PApell_rep" />
+          <ScalarProperty Name="SApell_rep" ColumnName="SApell_rep" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="Tipo_empresa" ColumnName="Tipo_empresa" />
+          <ScalarProperty Name="Tipo_Servicio" ColumnName="Tipo_Servicio" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Compra">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Compra">
+        <MappingFragment StoreEntitySet="Compra">
+          <ScalarProperty Name="ID_Compra" ColumnName="ID_Compra" />
+          <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Total_Compra" ColumnName="Total_Compra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Detalle_compra">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Detalle_compra">
+        <MappingFragment StoreEntitySet="Detalle_compra">
+          <ScalarProperty Name="ID_Compra" ColumnName="ID_Compra" />
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleDevCompra">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.DetalleDevCompra">
+        <MappingFragment StoreEntitySet="DetalleDevCompra">
+          <ScalarProperty Name="ID_DevolucionCompra" ColumnName="ID_DevolucionCompra" />
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleReparacion">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.DetalleReparacion">
+        <MappingFragment StoreEntitySet="DetalleReparacion">
+          <ScalarProperty Name="ID_Reparacion" ColumnName="ID_Reparacion" />
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DevolucionCompra">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.DevolucionCompra">
+        <MappingFragment StoreEntitySet="DevolucionCompra">
+          <ScalarProperty Name="ID_DevolucionCompras" ColumnName="ID_DevolucionCompras" />
+          <ScalarProperty Name="ID_Compra" ColumnName="ID_Compra" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DevolucionVenta">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.DevolucionVenta">
+        <MappingFragment StoreEntitySet="DevolucionVenta">
+          <ScalarProperty Name="ID_DevVenta" ColumnName="ID_DevVenta" />
+          <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estado_uso">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Estado_uso">
+        <MappingFragment StoreEntitySet="Estado_uso">
+          <ScalarProperty Name="ID_Estado" ColumnName="ID_Estado" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lester_pieza">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Lester_pieza">
+        <MappingFragment StoreEntitySet="Lester_pieza">
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="ID_LesterPieza" ColumnName="ID_LesterPieza" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pieza">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Pieza">
+        <MappingFragment StoreEntitySet="Pieza">
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="ID_Proveedor" ColumnName="ID_Proveedor" />
+          <ScalarProperty Name="ID_Estado" ColumnName="ID_Estado" />
+          <ScalarProperty Name="ID_TipoPiezas" ColumnName="ID_TipoPiezas" />
+          <ScalarProperty Name="SRCImagen" ColumnName="SRCImagen" />
+          <ScalarProperty Name="SRCImagenCir" ColumnName="SRCImagenCir" />
+          <ScalarProperty Name="SRCImagenCorr" ColumnName="SRCImagenCorr" />
+          <ScalarProperty Name="estante" ColumnName="estante" />
+          <ScalarProperty Name="tension" ColumnName="tension" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="circuito" ColumnName="circuito" />
+          <ScalarProperty Name="dientes" ColumnName="dientes" />
+          <ScalarProperty Name="recuento_terminales" ColumnName="recuento_terminales" />
+          <ScalarProperty Name="voltaje" ColumnName="voltaje" />
+          <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proveedor">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Proveedor">
+        <MappingFragment StoreEntitySet="Proveedor">
+          <ScalarProperty Name="ID_Proveedor" ColumnName="ID_Proveedor" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="ID_TipoProveedor" ColumnName="ID_TipoProveedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reparacion">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Reparacion">
+        <MappingFragment StoreEntitySet="Reparacion">
+          <ScalarProperty Name="ID_Reparacion" ColumnName="ID_Reparacion" />
+          <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+          <ScalarProperty Name="FechaIni" ColumnName="FechaIni" />
+          <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sustituto_piezas">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Sustituto_piezas">
+        <MappingFragment StoreEntitySet="Sustituto_piezas">
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="ID_Sustituto" ColumnName="ID_Sustituto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_piezas">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Tipo_piezas">
+        <MappingFragment StoreEntitySet="Tipo_piezas">
+          <ScalarProperty Name="ID_TipoPiezas" ColumnName="ID_TipoPiezas" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_proveedor">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Tipo_proveedor">
+        <MappingFragment StoreEntitySet="Tipo_proveedor">
+          <ScalarProperty Name="ID_TipoProveedor" ColumnName="ID_TipoProveedor" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vehiculo">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Vehiculo">
+        <MappingFragment StoreEntitySet="Vehiculo">
+          <ScalarProperty Name="ID_Vehiculo" ColumnName="ID_Vehiculo" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Años" ColumnName="Años" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Venta">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Venta">
+        <MappingFragment StoreEntitySet="Venta">
+          <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+          <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+          <ScalarProperty Name="Fecha_Inicial" ColumnName="Fecha_Inicial" />
+          <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Detalle_venta">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.Detalle_venta">
+        <MappingFragment StoreEntitySet="Detalle_venta">
+          <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleDevVenta">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.DetalleDevVenta">
+        <MappingFragment StoreEntitySet="DetalleDevVenta">
+          <ScalarProperty Name="ID_DevVenta" ColumnName="ID_DevVenta" />
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="CantPieza" ColumnName="CantPieza" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportesVentasPorCliente">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.ReportesVentasPorCliente">
+        <MappingFragment StoreEntitySet="ReportesVentasPorCliente">
+          <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+          <ScalarProperty Name="Codigo_cliente" ColumnName="Codigo_cliente" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="Nombre_representante" ColumnName="Nombre_representante" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportesVentasPorPiezas">
+      <EntityTypeMapping TypeName="ELECTROMOBILEDBModel.ReportesVentasPorPiezas">
+        <MappingFragment StoreEntitySet="ReportesVentasPorPiezas">
+          <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+          <ScalarProperty Name="Codigo_pieza" ColumnName="Codigo_pieza" />
+          <ScalarProperty Name="Nombre_pieza" ColumnName="Nombre_pieza" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PiezasVehiculos" TypeName="ELECTROMOBILEDBModel.PiezasVehiculos" StoreEntitySet="PiezasVehiculos">
+      <EndProperty Name="Pieza">
+        <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+      </EndProperty>
+      <EndProperty Name="Vehiculo">
+        <ScalarProperty Name="ID_Vehiculo" ColumnName="ID_Vehiculo" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="AgregarDetalleCompra" FunctionName="ELECTROMOBILEDBModel.Store.AgregarDetalleCompra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.AgregarDetalleCompra_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AgregarDetalleVenta" FunctionName="ELECTROMOBILEDBModel.Store.AgregarDetalleVenta" />
+    <FunctionImportMapping FunctionImportName="BuscarCliente" FunctionName="ELECTROMOBILEDBModel.Store.BuscarCliente">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.BuscarCliente_Result">
+          <ScalarProperty Name="RUC" ColumnName="RUC" />
+          <ScalarProperty Name="PNombre_rep" ColumnName="PNombre_rep" />
+          <ScalarProperty Name="SNombre_rep" ColumnName="SNombre_rep" />
+          <ScalarProperty Name="PApell_rep" ColumnName="PApell_rep" />
+          <ScalarProperty Name="SApell_rep" ColumnName="SApell_rep" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="Tipo_empresa" ColumnName="Tipo_empresa" />
+          <ScalarProperty Name="Tipo_Servicio" ColumnName="Tipo_Servicio" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarCompra" FunctionName="ELECTROMOBILEDBModel.Store.BuscarCompra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.BuscarCompra_Result">
+          <ScalarProperty Name="ID_Compra" ColumnName="ID_Compra" />
+          <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Total_Compra" ColumnName="Total_Compra" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarDetalle_venta" FunctionName="ELECTROMOBILEDBModel.Store.BuscarDetalle_venta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.BuscarDetalle_venta_Result">
+          <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarReparacion" FunctionName="ELECTROMOBILEDBModel.Store.BuscarReparacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.BuscarReparacion_Result">
+          <ScalarProperty Name="ID_Reparacion" ColumnName="ID_Reparacion" />
+          <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+          <ScalarProperty Name="FechaIni" ColumnName="FechaIni" />
+          <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuscarVenta" FunctionName="ELECTROMOBILEDBModel.Store.BuscarVenta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.BuscarVenta_Result">
+          <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+          <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+          <ScalarProperty Name="Fecha_Inicial" ColumnName="Fecha_Inicial" />
+          <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CrearCompra" FunctionName="ELECTROMOBILEDBModel.Store.CrearCompra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.CrearCompra_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EditarCliente" FunctionName="ELECTROMOBILEDBModel.Store.EditarCliente" />
+    <FunctionImportMapping FunctionImportName="EditarDetalle_venta" FunctionName="ELECTROMOBILEDBModel.Store.EditarDetalle_venta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.EditarDetalle_venta_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EditarDetalleCompra" FunctionName="ELECTROMOBILEDBModel.Store.EditarDetalleCompra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.EditarDetalleCompra_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EditarDetalleDevCompra" FunctionName="ELECTROMOBILEDBModel.Store.EditarDetalleDevCompra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.EditarDetalleDevCompra_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EditarDetalleDevVenta" FunctionName="ELECTROMOBILEDBModel.Store.EditarDetalleDevVenta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.EditarDetalleDevVenta_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EditarDetalleReparacion" FunctionName="ELECTROMOBILEDBModel.Store.EditarDetalleReparacion" />
+    <FunctionImportMapping FunctionImportName="EditarDevolucionDeCompra" FunctionName="ELECTROMOBILEDBModel.Store.EditarDevolucionDeCompra" />
+    <FunctionImportMapping FunctionImportName="EditarDevVenta" FunctionName="ELECTROMOBILEDBModel.Store.EditarDevVenta" />
+    <FunctionImportMapping FunctionImportName="EditarPieza" FunctionName="ELECTROMOBILEDBModel.Store.EditarPieza" />
+    <FunctionImportMapping FunctionImportName="EditarProveedor" FunctionName="ELECTROMOBILEDBModel.Store.EditarProveedor" />
+    <FunctionImportMapping FunctionImportName="EditarReparacion" FunctionName="ELECTROMOBILEDBModel.Store.EditarReparacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.EditarReparacion_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EditarSustitutoPieza" FunctionName="ELECTROMOBILEDBModel.Store.EditarSustitutoPieza">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.EditarSustitutoPieza_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EditarVehiculo" FunctionName="ELECTROMOBILEDBModel.Store.EditarVehiculo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.EditarVehiculo_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EditarVenta" FunctionName="ELECTROMOBILEDBModel.Store.EditarVenta" />
+    <FunctionImportMapping FunctionImportName="EliminarCliente" FunctionName="ELECTROMOBILEDBModel.Store.EliminarCliente" />
+    <FunctionImportMapping FunctionImportName="EliminarDetalle_venta" FunctionName="ELECTROMOBILEDBModel.Store.EliminarDetalle_venta" />
+    <FunctionImportMapping FunctionImportName="EliminarDetalleDeCompra" FunctionName="ELECTROMOBILEDBModel.Store.EliminarDetalleDeCompra" />
+    <FunctionImportMapping FunctionImportName="EliminarDetDevCompra" FunctionName="ELECTROMOBILEDBModel.Store.EliminarDetDevCompra" />
+    <FunctionImportMapping FunctionImportName="EliminarPieza" FunctionName="ELECTROMOBILEDBModel.Store.EliminarPieza" />
+    <FunctionImportMapping FunctionImportName="EliminarPiezaEnVehiculo" FunctionName="ELECTROMOBILEDBModel.Store.EliminarPiezaEnVehiculo" />
+    <FunctionImportMapping FunctionImportName="EliminarProveedor" FunctionName="ELECTROMOBILEDBModel.Store.EliminarProveedor" />
+    <FunctionImportMapping FunctionImportName="EliminarSustitutoPieza" FunctionName="ELECTROMOBILEDBModel.Store.EliminarSustitutoPieza" />
+    <FunctionImportMapping FunctionImportName="InsertarCliente" FunctionName="ELECTROMOBILEDBModel.Store.InsertarCliente" />
+    <FunctionImportMapping FunctionImportName="InsertarDetalleDevCompra" FunctionName="ELECTROMOBILEDBModel.Store.InsertarDetalleDevCompra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.InsertarDetalleDevCompra_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertarDetalleDevVenta" FunctionName="ELECTROMOBILEDBModel.Store.InsertarDetalleDevVenta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.InsertarDetalleDevVenta_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertarDetalleReparacion" FunctionName="ELECTROMOBILEDBModel.Store.InsertarDetalleReparacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.InsertarDetalleReparacion_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertarDevolucionCompra" FunctionName="ELECTROMOBILEDBModel.Store.InsertarDevolucionCompra" />
+    <FunctionImportMapping FunctionImportName="InsertarDevVenta" FunctionName="ELECTROMOBILEDBModel.Store.InsertarDevVenta" />
+    <FunctionImportMapping FunctionImportName="InsertarLester" FunctionName="ELECTROMOBILEDBModel.Store.InsertarLester">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.InsertarLester_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertarPieza" FunctionName="ELECTROMOBILEDBModel.Store.InsertarPieza">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.InsertarPieza_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertarPiezaVehiculo" FunctionName="ELECTROMOBILEDBModel.Store.InsertarPiezaVehiculo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.InsertarPiezaVehiculo_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertarProveedor" FunctionName="ELECTROMOBILEDBModel.Store.InsertarProveedor">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.InsertarProveedor_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertarReparacion" FunctionName="ELECTROMOBILEDBModel.Store.InsertarReparacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.InsertarReparacion_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertarSustituto" FunctionName="ELECTROMOBILEDBModel.Store.InsertarSustituto" />
+    <FunctionImportMapping FunctionImportName="InsertarVehiculo" FunctionName="ELECTROMOBILEDBModel.Store.InsertarVehiculo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.InsertarVehiculo_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="Column2" ColumnName="Column2" />
+          <ScalarProperty Name="Column3" ColumnName="Column3" />
+          <ScalarProperty Name="Column4" ColumnName="Column4" />
+          <ScalarProperty Name="Column5" ColumnName="Column5" />
+          <ScalarProperty Name="Column6" ColumnName="Column6" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertarVenta" FunctionName="ELECTROMOBILEDBModel.Store.InsertarVenta" />
+    <FunctionImportMapping FunctionImportName="ListarCliente" FunctionName="ELECTROMOBILEDBModel.Store.ListarCliente">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.ListarCliente_Result">
+          <ScalarProperty Name="RUC" ColumnName="RUC" />
+          <ScalarProperty Name="PNombre_rep" ColumnName="PNombre_rep" />
+          <ScalarProperty Name="SNombre_rep" ColumnName="SNombre_rep" />
+          <ScalarProperty Name="PApell_rep" ColumnName="PApell_rep" />
+          <ScalarProperty Name="SApell_rep" ColumnName="SApell_rep" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="Tipo_empresa" ColumnName="Tipo_empresa" />
+          <ScalarProperty Name="Tipo_Servicio" ColumnName="Tipo_Servicio" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarCompras" FunctionName="ELECTROMOBILEDBModel.Store.ListarCompras">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.ListarCompras_Result">
+          <ScalarProperty Name="ID_Compra" ColumnName="ID_Compra" />
+          <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Total_Compra" ColumnName="Total_Compra" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarDetalle_venta" FunctionName="ELECTROMOBILEDBModel.Store.ListarDetalle_venta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.ListarDetalle_venta_Result">
+          <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarPiezas" FunctionName="ELECTROMOBILEDBModel.Store.ListarPiezas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.ListarPiezas_Result">
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="ID_Proveedor" ColumnName="ID_Proveedor" />
+          <ScalarProperty Name="ID_Estado" ColumnName="ID_Estado" />
+          <ScalarProperty Name="ID_TipoPiezas" ColumnName="ID_TipoPiezas" />
+          <ScalarProperty Name="SRCImagen" ColumnName="SRCImagen" />
+          <ScalarProperty Name="SRCImagenCir" ColumnName="SRCImagenCir" />
+          <ScalarProperty Name="SRCImagenCorr" ColumnName="SRCImagenCorr" />
+          <ScalarProperty Name="estante" ColumnName="estante" />
+          <ScalarProperty Name="tension" ColumnName="tension" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="circuito" ColumnName="circuito" />
+          <ScalarProperty Name="dientes" ColumnName="dientes" />
+          <ScalarProperty Name="recuento_terminales" ColumnName="recuento_terminales" />
+          <ScalarProperty Name="voltaje" ColumnName="voltaje" />
+          <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarPiezas_Susitutias" FunctionName="ELECTROMOBILEDBModel.Store.ListarPiezas_Susitutias">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.ListarPiezas_Susitutias_Result">
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="ID_Sustituto" ColumnName="ID_Sustituto" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarReparacion" FunctionName="ELECTROMOBILEDBModel.Store.ListarReparacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.ListarReparacion_Result">
+          <ScalarProperty Name="ID_Reparacion" ColumnName="ID_Reparacion" />
+          <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+          <ScalarProperty Name="FechaIni" ColumnName="FechaIni" />
+          <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarVehiculos" FunctionName="ELECTROMOBILEDBModel.Store.ListarVehiculos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.ListarVehiculos_Result">
+          <ScalarProperty Name="ID_Vehiculo" ColumnName="ID_Vehiculo" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Años" ColumnName="Años" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarVenta" FunctionName="ELECTROMOBILEDBModel.Store.ListarVenta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.ListarVenta_Result">
+          <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+          <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+          <ScalarProperty Name="Fecha_Inicial" ColumnName="Fecha_Inicial" />
+          <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ObtenerDetCompra" FunctionName="ELECTROMOBILEDBModel.Store.ObtenerDetCompra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.ObtenerDetCompra_Result">
+          <ScalarProperty Name="ID_Compra" ColumnName="ID_Compra" />
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ObtenerDetVentas" FunctionName="ELECTROMOBILEDBModel.Store.ObtenerDetVentas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ELECTROMOBILEDBModel.ObtenerDetVentas_Result">
+          <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+          <ScalarProperty Name="ID_Pieza" ColumnName="ID_Pieza" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ListarDetDevCompra_DevCompra" FunctionName="ELECTROMOBILEDBModel.Store.ListarDetDevCompra_DevCompra" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cfdb1853aa7c4f42a92185c8579fa79e" Name="Diagram1" DisplayType="true">
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Cliente" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Compra" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Detalle_compra" Width="1.5" PointX="7.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.DetalleDevCompra" Width="1.5" PointX="9.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.DetalleReparacion" Width="1.5" PointX="12.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.DevolucionCompra" Width="1.5" PointX="7.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.DevolucionVenta" Width="1.5" PointX="13.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Estado_uso" Width="1.5" PointX="8" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Lester_pieza" Width="1.5" PointX="12.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Pieza" Width="1.5" PointX="10.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Proveedor" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Reparacion" Width="1.5" PointX="10.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Sustituto_piezas" Width="1.5" PointX="12.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Tipo_piezas" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Tipo_proveedor" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Vehiculo" Width="1.5" PointX="12.5" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Venta" Width="1.5" PointX="11" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.Detalle_venta" Width="1.5" PointX="15.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.DetalleDevVenta" Width="1.5" PointX="15.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.ReportesVentasPorCliente" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.ReportesVentasPorPiezas" Width="2" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Reparacio__ID_Cl__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Venta__ID_Client__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Compra__Id_Prove__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Detalle_c__ID_Co__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Devolucio__ID_Co__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Detalle_c__ID_Pi__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__DetalleDe__ID_De__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__DetalleDe__ID_Pi__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__DetalleRe__ID_Pi__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__DetalleRe__ID_Re__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__DetalleDe__ID_De__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Devolucio__ID_Ve__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Pieza__ID_Estado__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Lester_pi__ID_Pi__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Detalle_v__ID_Pi__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__DetalleDe__ID_Pi__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Pieza__ID_Provee__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Pieza__ID_TipoPi__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Sustituto__ID_Pi__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Proveedor__ID_Ti__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.FK__Detalle_v__ID_Ve__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="ELECTROMOBILEDBModel.PiezasVehiculos" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.ReporteVentasPorPieza" Width="2" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.InformacionProveedores" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.InformacionDeVentas" Width="2.125" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ELECTROMOBILEDBModel.InformacionDePedidos" Width="1.5" PointX="12.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

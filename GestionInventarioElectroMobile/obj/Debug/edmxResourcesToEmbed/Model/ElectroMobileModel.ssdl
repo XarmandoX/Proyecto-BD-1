@@ -1,0 +1,934 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ELECTROMOBILEDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="RUC" />
+    </Key>
+    <Property Name="RUC" Type="nvarchar" MaxLength="14" Nullable="false" />
+    <Property Name="PNombre_rep" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="SNombre_rep" Type="nvarchar" MaxLength="30" />
+    <Property Name="PApell_rep" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="SApell_rep" Type="nvarchar" MaxLength="30" />
+    <Property Name="Correo" Type="nvarchar" MaxLength="45" />
+    <Property Name="Telefono" Type="char" MaxLength="8" />
+    <Property Name="Empresa" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="Tipo_empresa" Type="nvarchar" MaxLength="75" />
+    <Property Name="Tipo_Servicio" Type="nvarchar" MaxLength="55" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="55" />
+  </EntityType>
+  <EntityType Name="Compra">
+    <Key>
+      <PropertyRef Name="ID_Compra" />
+    </Key>
+    <Property Name="ID_Compra" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="Id_Proveedor" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Total_Compra" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Detalle_compra">
+    <Key>
+      <PropertyRef Name="ID_Compra" />
+      <PropertyRef Name="ID_Pieza" />
+    </Key>
+    <Property Name="ID_Compra" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="ID_Pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="precio" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="subtotal" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ELECTROMOBILEDB.dbo.Detalle_venta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Detalle_venta">
+    <Key>
+      <PropertyRef Name="ID_Pieza" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="subtotal" />
+    </Key>
+    <Property Name="ID_Venta" Type="int" />
+    <Property Name="ID_Pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="subtotal" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetalleDevCompra">
+    <Key>
+      <PropertyRef Name="ID_DevolucionCompra" />
+      <PropertyRef Name="ID_Pieza" />
+    </Key>
+    <Property Name="ID_DevolucionCompra" Type="int" Nullable="false" />
+    <Property Name="ID_Pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ELECTROMOBILEDB.dbo.DetalleDevVenta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DetalleDevVenta">
+    <Key>
+      <PropertyRef Name="ID_DevVenta" />
+      <PropertyRef Name="ID_Pieza" />
+      <PropertyRef Name="CantPieza" />
+    </Key>
+    <Property Name="ID_DevVenta" Type="int" Nullable="false" />
+    <Property Name="ID_Pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="CantPieza" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetalleReparacion">
+    <Key>
+      <PropertyRef Name="ID_Reparacion" />
+      <PropertyRef Name="ID_Pieza" />
+    </Key>
+    <Property Name="ID_Reparacion" Type="int" Nullable="false" />
+    <Property Name="ID_Pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="Precio" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Subtotal" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DevolucionCompra">
+    <Key>
+      <PropertyRef Name="ID_DevolucionCompras" />
+    </Key>
+    <Property Name="ID_DevolucionCompras" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Compra" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DevolucionVenta">
+    <Key>
+      <PropertyRef Name="ID_DevVenta" />
+    </Key>
+    <Property Name="ID_DevVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Venta" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+    <Property Name="Total" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estado_uso">
+    <Key>
+      <PropertyRef Name="ID_Estado" />
+    </Key>
+    <Property Name="ID_Estado" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="55" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Lester_pieza">
+    <Key>
+      <PropertyRef Name="ID_LesterPieza" />
+    </Key>
+    <Property Name="ID_Pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="ID_LesterPieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pieza">
+    <Key>
+      <PropertyRef Name="ID_Pieza" />
+    </Key>
+    <Property Name="ID_Pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="ID_Proveedor" Type="nvarchar" MaxLength="75" />
+    <Property Name="ID_Estado" Type="tinyint" />
+    <Property Name="ID_TipoPiezas" Type="tinyint" Nullable="false" />
+    <Property Name="SRCImagen" Type="nvarchar(max)" />
+    <Property Name="SRCImagenCir" Type="nvarchar(max)" />
+    <Property Name="SRCImagenCorr" Type="nvarchar(max)" />
+    <Property Name="estante" Type="char" MaxLength="5" />
+    <Property Name="tension" Type="tinyint" />
+    <Property Name="precio" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="circuito" Type="nvarchar(max)" />
+    <Property Name="dientes" Type="tinyint" />
+    <Property Name="recuento_terminales" Type="tinyint" />
+    <Property Name="voltaje" Type="nvarchar" MaxLength="75" />
+    <Property Name="Fabricante" Type="nvarchar" MaxLength="75" />
+  </EntityType>
+  <EntityType Name="PiezasVehiculos">
+    <Key>
+      <PropertyRef Name="ID_Vehiculo" />
+      <PropertyRef Name="ID_Pieza" />
+    </Key>
+    <Property Name="ID_Vehiculo" Type="int" Nullable="false" />
+    <Property Name="ID_Pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="ID_Proveedor" />
+    </Key>
+    <Property Name="ID_Proveedor" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="Empresa" Type="nvarchar" MaxLength="75" />
+    <Property Name="Correo" Type="nvarchar" MaxLength="75" />
+    <Property Name="Telefono" Type="char" MaxLength="8" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="135" Nullable="false" />
+    <Property Name="ID_TipoProveedor" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reparacion">
+    <Key>
+      <PropertyRef Name="ID_Reparacion" />
+    </Key>
+    <Property Name="ID_Reparacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Cliente" Type="nvarchar" MaxLength="14" />
+    <Property Name="FechaIni" Type="datetime" Nullable="false" />
+    <Property Name="FechaFinal" Type="datetime" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sustituto_piezas">
+    <Key>
+      <PropertyRef Name="ID_Sustituto" />
+    </Key>
+    <Property Name="ID_Pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="ID_Sustituto" Type="nvarchar" MaxLength="35" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipo_piezas">
+    <Key>
+      <PropertyRef Name="ID_TipoPiezas" />
+    </Key>
+    <Property Name="ID_TipoPiezas" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="35" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipo_proveedor">
+    <Key>
+      <PropertyRef Name="ID_TipoProveedor" />
+    </Key>
+    <Property Name="ID_TipoProveedor" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="35" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vehiculo">
+    <Key>
+      <PropertyRef Name="ID_Vehiculo" />
+    </Key>
+    <Property Name="ID_Vehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="Años" Type="nvarchar" MaxLength="35" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="ID_Venta" />
+    </Key>
+    <Property Name="ID_Venta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Cliente" Type="nvarchar" MaxLength="14" />
+    <Property Name="Fecha_Inicial" Type="datetime" />
+    <Property Name="FechaEntrega" Type="datetime" Nullable="false" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ELECTROMOBILEDB.dbo.ReportesVentasPorCliente' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ReportesVentasPorCliente">
+    <Key>
+      <PropertyRef Name="ID_Venta" />
+      <PropertyRef Name="Codigo_cliente" />
+      <PropertyRef Name="Empresa" />
+      <PropertyRef Name="Nombre_representante" />
+      <PropertyRef Name="fecha" />
+    </Key>
+    <Property Name="ID_Venta" Type="int" Nullable="false" />
+    <Property Name="Codigo_cliente" Type="nvarchar" MaxLength="14" Nullable="false" />
+    <Property Name="Empresa" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="Nombre_representante" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="precio" Type="decimal" Precision="38" Scale="3" />
+    <Property Name="Subtotal" Type="decimal" Precision="38" Scale="3" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ELECTROMOBILEDB.dbo.ReportesVentasPorPiezas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ReportesVentasPorPiezas">
+    <Key>
+      <PropertyRef Name="ID_Venta" />
+      <PropertyRef Name="Codigo_pieza" />
+      <PropertyRef Name="Nombre_pieza" />
+    </Key>
+    <Property Name="ID_Venta" Type="int" Nullable="false" />
+    <Property Name="Codigo_pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="Nombre_pieza" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Subtotal" Type="decimal" Precision="38" Scale="3" />
+  </EntityType>
+  <Association Name="FK__Compra__Id_Prove__4222D4EF">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+    <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="ID_Proveedor" />
+      </Principal>
+      <Dependent Role="Compra">
+        <PropertyRef Name="Id_Proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalle_c__ID_Co__44FF419A">
+    <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+    <End Role="Detalle_compra" Type="Self.Detalle_compra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compra">
+        <PropertyRef Name="ID_Compra" />
+      </Principal>
+      <Dependent Role="Detalle_compra">
+        <PropertyRef Name="ID_Compra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalle_c__ID_Pi__45F365D3">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="Detalle_compra" Type="Self.Detalle_compra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="Detalle_compra">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalle_v__ID_Pi__4BAC3F29">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="Detalle_venta" Type="Self.Detalle_venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="Detalle_venta">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalle_v__ID_Ve__4AB81AF0">
+    <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+    <End Role="Detalle_venta" Type="Self.Detalle_venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="ID_Venta" />
+      </Principal>
+      <Dependent Role="Detalle_venta">
+        <PropertyRef Name="ID_Venta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleDe__ID_De__5812160E">
+    <End Role="DevolucionCompra" Type="Self.DevolucionCompra" Multiplicity="1" />
+    <End Role="DetalleDevCompra" Type="Self.DetalleDevCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DevolucionCompra">
+        <PropertyRef Name="ID_DevolucionCompras" />
+      </Principal>
+      <Dependent Role="DetalleDevCompra">
+        <PropertyRef Name="ID_DevolucionCompra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleDe__ID_De__5DCAEF64">
+    <End Role="DevolucionVenta" Type="Self.DevolucionVenta" Multiplicity="1" />
+    <End Role="DetalleDevVenta" Type="Self.DetalleDevVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DevolucionVenta">
+        <PropertyRef Name="ID_DevVenta" />
+      </Principal>
+      <Dependent Role="DetalleDevVenta">
+        <PropertyRef Name="ID_DevVenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleDe__ID_Pi__59063A47">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="DetalleDevCompra" Type="Self.DetalleDevCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="DetalleDevCompra">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleDe__ID_Pi__5EBF139D">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="DetalleDevVenta" Type="Self.DetalleDevVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="DetalleDevVenta">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleRe__ID_Pi__52593CB8">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="DetalleReparacion" Type="Self.DetalleReparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="DetalleReparacion">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleRe__ID_Re__5165187F">
+    <End Role="Reparacion" Type="Self.Reparacion" Multiplicity="1" />
+    <End Role="DetalleReparacion" Type="Self.DetalleReparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reparacion">
+        <PropertyRef Name="ID_Reparacion" />
+      </Principal>
+      <Dependent Role="DetalleReparacion">
+        <PropertyRef Name="ID_Reparacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Devolucio__ID_Co__5535A963">
+    <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+    <End Role="DevolucionCompra" Type="Self.DevolucionCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compra">
+        <PropertyRef Name="ID_Compra" />
+      </Principal>
+      <Dependent Role="DevolucionCompra">
+        <PropertyRef Name="ID_Compra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Devolucio__ID_Ve__5BE2A6F2">
+    <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+    <End Role="DevolucionVenta" Type="Self.DevolucionVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="ID_Venta" />
+      </Principal>
+      <Dependent Role="DevolucionVenta">
+        <PropertyRef Name="ID_Venta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lester_pi__ID_Pi__3C69FB99">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="Lester_pieza" Type="Self.Lester_pieza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="Lester_pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pieza__ID_Estado__31EC6D26">
+    <End Role="Estado_uso" Type="Self.Estado_uso" Multiplicity="0..1" />
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado_uso">
+        <PropertyRef Name="ID_Estado" />
+      </Principal>
+      <Dependent Role="Pieza">
+        <PropertyRef Name="ID_Estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pieza__ID_Provee__30F848ED">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="ID_Proveedor" />
+      </Principal>
+      <Dependent Role="Pieza">
+        <PropertyRef Name="ID_Proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pieza__ID_TipoPi__32E0915F">
+    <End Role="Tipo_piezas" Type="Self.Tipo_piezas" Multiplicity="1" />
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_piezas">
+        <PropertyRef Name="ID_TipoPiezas" />
+      </Principal>
+      <Dependent Role="Pieza">
+        <PropertyRef Name="ID_TipoPiezas" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PiezasVeh__ID_Pi__36B12243">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="PiezasVehiculos" Type="Self.PiezasVehiculos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="PiezasVehiculos">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PiezasVeh__ID_Ve__35BCFE0A">
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="1" />
+    <End Role="PiezasVehiculos" Type="Self.PiezasVehiculos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="ID_Vehiculo" />
+      </Principal>
+      <Dependent Role="PiezasVehiculos">
+        <PropertyRef Name="ID_Vehiculo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Proveedor__ID_Ti__2A4B4B5E">
+    <End Role="Tipo_proveedor" Type="Self.Tipo_proveedor" Multiplicity="1" />
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_proveedor">
+        <PropertyRef Name="ID_TipoProveedor" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="ID_TipoProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reparacio__ID_Cl__4E88ABD4">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="Reparacion" Type="Self.Reparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="RUC" />
+      </Principal>
+      <Dependent Role="Reparacion">
+        <PropertyRef Name="ID_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sustituto__ID_Pi__398D8EEE">
+    <End Role="Pieza" Type="Self.Pieza" Multiplicity="1" />
+    <End Role="Sustituto_piezas" Type="Self.Sustituto_piezas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pieza">
+        <PropertyRef Name="ID_Pieza" />
+      </Principal>
+      <Dependent Role="Sustituto_piezas">
+        <PropertyRef Name="ID_Pieza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Venta__ID_Client__48CFD27E">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="RUC" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="ID_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AgregarDetalleCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IC" Type="nvarchar" Mode="In" />
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="PC" Type="decimal" Mode="In" />
+    <Parameter Name="Can" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AgregarDetalleVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_Venta" Type="int" Mode="In" />
+    <Parameter Name="ID_Pieza" Type="nvarchar" Mode="In" />
+    <Parameter Name="cantidad" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BuscarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Valor" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="BuscarCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IC" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="BuscarDetalle_venta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IVB" Type="int" Mode="In" />
+    <Parameter Name="IPB" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="BuscarReparacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDR" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BuscarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_Venta" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CalcularSubtotal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
+    <Parameter Name="Cant" Type="int" Mode="In" />
+    <Parameter Name="Precio" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="CrearCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IC" Type="nvarchar" Mode="In" />
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="Fecha" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="EditarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RUC" Type="nvarchar" Mode="In" />
+    <Parameter Name="Pn" Type="nvarchar" Mode="In" />
+    <Parameter Name="Sn" Type="nvarchar" Mode="In" />
+    <Parameter Name="Pa" Type="nvarchar" Mode="In" />
+    <Parameter Name="Sa" Type="nvarchar" Mode="In" />
+    <Parameter Name="CorC" Type="nvarchar" Mode="In" />
+    <Parameter Name="TelC" Type="char" Mode="In" />
+    <Parameter Name="TipoEmp" Type="nvarchar" Mode="In" />
+    <Parameter Name="TipoSer" Type="nvarchar" Mode="In" />
+    <Parameter Name="DirC" Type="nvarchar" Mode="In" />
+    <Parameter Name="EMP" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EditarDetalle_venta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IVB" Type="int" Mode="In" />
+    <Parameter Name="IPB" Type="nvarchar" Mode="In" />
+    <Parameter Name="cant" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditarDetalleCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ICB" Type="nvarchar" Mode="In" />
+    <Parameter Name="IPB" Type="nvarchar" Mode="In" />
+    <Parameter Name="PC" Type="decimal" Mode="In" />
+    <Parameter Name="Can" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditarDetalleDevCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_DevCompra" Type="int" Mode="In" />
+    <Parameter Name="IDP" Type="nvarchar" Mode="In" />
+    <Parameter Name="cant_Edit" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditarDetalleDevVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_DevVenta" Type="int" Mode="In" />
+    <Parameter Name="IDP" Type="nvarchar" Mode="In" />
+    <Parameter Name="cant_Edit" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditarDetalleReparacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IR" Type="int" Mode="In" />
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="PR" Type="decimal" Mode="In" />
+    <Parameter Name="CanR" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditarDevolucionDeCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDV" Type="int" Mode="In" />
+    <Parameter Name="Desc" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="EditarDevVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDV" Type="int" Mode="In" />
+    <Parameter Name="Desc" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="EditarPieza" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="IPrin" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ICir" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ICor" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Est" Type="char" Mode="In" />
+    <Parameter Name="Ten" Type="tinyint" Mode="In" />
+    <Parameter Name="Pre" Type="decimal" Mode="In" />
+    <Parameter Name="Cant" Type="int" Mode="In" />
+    <Parameter Name="Cir" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Di" Type="tinyint" Mode="In" />
+    <Parameter Name="RecTer" Type="tinyint" Mode="In" />
+    <Parameter Name="Volt" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EditarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="Np" Type="nvarchar" Mode="In" />
+    <Parameter Name="Ap" Type="nvarchar" Mode="In" />
+    <Parameter Name="Emp" Type="nvarchar" Mode="In" />
+    <Parameter Name="Cor" Type="nvarchar" Mode="In" />
+    <Parameter Name="Tel" Type="char" Mode="In" />
+    <Parameter Name="Dir" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EditarReparacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDR" Type="int" Mode="In" />
+    <Parameter Name="IDC" Type="nvarchar" Mode="In" />
+    <Parameter Name="FECHAFIN" Type="date" Mode="In" />
+  </Function>
+  <Function Name="EditarSustitutoPieza" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDPB" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDS" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDSEdit" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EditarVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDVB" Type="int" Mode="In" />
+    <Parameter Name="NombEdit" Type="nvarchar" Mode="In" />
+    <Parameter Name="AniosEdit" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EditarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_Venta" Type="int" Mode="In" />
+    <Parameter Name="RUC" Type="nvarchar" Mode="In" />
+    <Parameter Name="FechaEntrega" Type="date" Mode="In" />
+    <Parameter Name="Estado" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EliminarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RUC" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EliminarDetalle_venta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IV" Type="int" Mode="In" />
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EliminarDetalleDeCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IC" Type="nvarchar" Mode="In" />
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EliminarDetDevCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_DevCompra" Type="int" Mode="In" />
+    <Parameter Name="IDP" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EliminarPieza" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdPi" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EliminarPiezaEnVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IV" Type="int" Mode="In" />
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EliminarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EliminarSustitutoPieza" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDPB" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDSB" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="InsertarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RUC" Type="nvarchar" Mode="In" />
+    <Parameter Name="Pn" Type="nvarchar" Mode="In" />
+    <Parameter Name="Sn" Type="nvarchar" Mode="In" />
+    <Parameter Name="Pa" Type="nvarchar" Mode="In" />
+    <Parameter Name="Sa" Type="nvarchar" Mode="In" />
+    <Parameter Name="CorC" Type="nvarchar" Mode="In" />
+    <Parameter Name="TelC" Type="char" Mode="In" />
+    <Parameter Name="TipoEmp" Type="nvarchar" Mode="In" />
+    <Parameter Name="TipoSer" Type="nvarchar" Mode="In" />
+    <Parameter Name="DirC" Type="nvarchar" Mode="In" />
+    <Parameter Name="Emp" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="InsertarDetalleDevCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDC" Type="int" Mode="In" />
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="Can" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertarDetalleDevVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDV" Type="int" Mode="In" />
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="Can" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertarDetalleReparacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IR" Type="int" Mode="In" />
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="PR" Type="decimal" Mode="In" />
+    <Parameter Name="CanR" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertarDevolucionCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IC" Type="nvarchar" Mode="In" />
+    <Parameter Name="Desc" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="InsertarDevVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDV" Type="int" Mode="In" />
+    <Parameter Name="DESC" Type="nvarchar" Mode="In" />
+    <Parameter Name="FECHADEV" Type="date" Mode="In" />
+    <Parameter Name="total" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="InsertarLester" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="IL" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="InsertarPieza" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="IProv" Type="nvarchar" Mode="In" />
+    <Parameter Name="IE" Type="tinyint" Mode="In" />
+    <Parameter Name="ITipo" Type="tinyint" Mode="In" />
+    <Parameter Name="IPrin" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ICir" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ICor" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Est" Type="char" Mode="In" />
+    <Parameter Name="Ten" Type="tinyint" Mode="In" />
+    <Parameter Name="Pre" Type="decimal" Mode="In" />
+    <Parameter Name="Cant" Type="int" Mode="In" />
+    <Parameter Name="Cir" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Di" Type="tinyint" Mode="In" />
+    <Parameter Name="RecTer" Type="tinyint" Mode="In" />
+    <Parameter Name="Volt" Type="nvarchar" Mode="In" />
+    <Parameter Name="Fab" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="InsertarPiezaVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="IV" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="Np" Type="nvarchar" Mode="In" />
+    <Parameter Name="Ap" Type="nvarchar" Mode="In" />
+    <Parameter Name="Emp" Type="nvarchar" Mode="In" />
+    <Parameter Name="Cor" Type="nvarchar" Mode="In" />
+    <Parameter Name="Tel" Type="char" Mode="In" />
+    <Parameter Name="Dir" Type="nvarchar" Mode="In" />
+    <Parameter Name="IT" Type="tinyint" Mode="In" />
+  </Function>
+  <Function Name="InsertarReparacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDC" Type="nvarchar" Mode="In" />
+    <Parameter Name="FECHAFIN" Type="date" Mode="In" />
+  </Function>
+  <Function Name="InsertarSustituto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IP" Type="nvarchar" Mode="In" />
+    <Parameter Name="IS" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="InsertarVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombres" Type="nvarchar" Mode="In" />
+    <Parameter Name="Anios" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="InsertarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RUC" Type="nvarchar" Mode="In" />
+    <Parameter Name="FechaEntrega" Type="date" Mode="In" />
+  </Function>
+  <Function Name="ListarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarCompras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarDetalle_venta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarDetDevCompra_DevCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_DevCompra" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ListarPiezas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarPiezas_Susitutias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDPB" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ListarReparacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ListarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ObtenerDetCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDC" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ObtenerDetVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDV" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="ELECTROMOBILEDBModelStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Compra" EntityType="Self.Compra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detalle_compra" EntityType="Self.Detalle_compra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleDevCompra" EntityType="Self.DetalleDevCompra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleReparacion" EntityType="Self.DetalleReparacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DevolucionCompra" EntityType="Self.DevolucionCompra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DevolucionVenta" EntityType="Self.DevolucionVenta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estado_uso" EntityType="Self.Estado_uso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lester_pieza" EntityType="Self.Lester_pieza" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pieza" EntityType="Self.Pieza" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PiezasVehiculos" EntityType="Self.PiezasVehiculos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reparacion" EntityType="Self.Reparacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sustituto_piezas" EntityType="Self.Sustituto_piezas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo_piezas" EntityType="Self.Tipo_piezas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo_proveedor" EntityType="Self.Tipo_proveedor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detalle_venta" EntityType="Self.Detalle_venta" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Detalle_venta].[ID_Venta] AS [ID_Venta], 
+    [Detalle_venta].[ID_Pieza] AS [ID_Pieza], 
+    [Detalle_venta].[cantidad] AS [cantidad], 
+    [Detalle_venta].[subtotal] AS [subtotal]
+    FROM [dbo].[Detalle_venta] AS [Detalle_venta]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DetalleDevVenta" EntityType="Self.DetalleDevVenta" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DetalleDevVenta].[ID_DevVenta] AS [ID_DevVenta], 
+    [DetalleDevVenta].[ID_Pieza] AS [ID_Pieza], 
+    [DetalleDevVenta].[CantPieza] AS [CantPieza]
+    FROM [dbo].[DetalleDevVenta] AS [DetalleDevVenta]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ReportesVentasPorCliente" EntityType="Self.ReportesVentasPorCliente" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ReportesVentasPorCliente].[ID_Venta] AS [ID_Venta], 
+    [ReportesVentasPorCliente].[Codigo_cliente] AS [Codigo_cliente], 
+    [ReportesVentasPorCliente].[Empresa] AS [Empresa], 
+    [ReportesVentasPorCliente].[Nombre_representante] AS [Nombre_representante], 
+    [ReportesVentasPorCliente].[fecha] AS [fecha], 
+    [ReportesVentasPorCliente].[Cantidad] AS [Cantidad], 
+    [ReportesVentasPorCliente].[precio] AS [precio], 
+    [ReportesVentasPorCliente].[Subtotal] AS [Subtotal]
+    FROM [dbo].[ReportesVentasPorCliente] AS [ReportesVentasPorCliente]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ReportesVentasPorPiezas" EntityType="Self.ReportesVentasPorPiezas" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ReportesVentasPorPiezas].[ID_Venta] AS [ID_Venta], 
+    [ReportesVentasPorPiezas].[Codigo_pieza] AS [Codigo_pieza], 
+    [ReportesVentasPorPiezas].[Nombre_pieza] AS [Nombre_pieza], 
+    [ReportesVentasPorPiezas].[Cantidad] AS [Cantidad], 
+    [ReportesVentasPorPiezas].[Subtotal] AS [Subtotal]
+    FROM [dbo].[ReportesVentasPorPiezas] AS [ReportesVentasPorPiezas]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Compra__Id_Prove__4222D4EF" Association="Self.FK__Compra__Id_Prove__4222D4EF">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Compra" EntitySet="Compra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalle_c__ID_Co__44FF419A" Association="Self.FK__Detalle_c__ID_Co__44FF419A">
+      <End Role="Compra" EntitySet="Compra" />
+      <End Role="Detalle_compra" EntitySet="Detalle_compra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalle_c__ID_Pi__45F365D3" Association="Self.FK__Detalle_c__ID_Pi__45F365D3">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="Detalle_compra" EntitySet="Detalle_compra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalle_v__ID_Pi__4BAC3F29" Association="Self.FK__Detalle_v__ID_Pi__4BAC3F29">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="Detalle_venta" EntitySet="Detalle_venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalle_v__ID_Ve__4AB81AF0" Association="Self.FK__Detalle_v__ID_Ve__4AB81AF0">
+      <End Role="Venta" EntitySet="Venta" />
+      <End Role="Detalle_venta" EntitySet="Detalle_venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleDe__ID_De__5812160E" Association="Self.FK__DetalleDe__ID_De__5812160E">
+      <End Role="DevolucionCompra" EntitySet="DevolucionCompra" />
+      <End Role="DetalleDevCompra" EntitySet="DetalleDevCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleDe__ID_De__5DCAEF64" Association="Self.FK__DetalleDe__ID_De__5DCAEF64">
+      <End Role="DevolucionVenta" EntitySet="DevolucionVenta" />
+      <End Role="DetalleDevVenta" EntitySet="DetalleDevVenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleDe__ID_Pi__59063A47" Association="Self.FK__DetalleDe__ID_Pi__59063A47">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="DetalleDevCompra" EntitySet="DetalleDevCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleDe__ID_Pi__5EBF139D" Association="Self.FK__DetalleDe__ID_Pi__5EBF139D">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="DetalleDevVenta" EntitySet="DetalleDevVenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleRe__ID_Pi__52593CB8" Association="Self.FK__DetalleRe__ID_Pi__52593CB8">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="DetalleReparacion" EntitySet="DetalleReparacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleRe__ID_Re__5165187F" Association="Self.FK__DetalleRe__ID_Re__5165187F">
+      <End Role="Reparacion" EntitySet="Reparacion" />
+      <End Role="DetalleReparacion" EntitySet="DetalleReparacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Devolucio__ID_Co__5535A963" Association="Self.FK__Devolucio__ID_Co__5535A963">
+      <End Role="Compra" EntitySet="Compra" />
+      <End Role="DevolucionCompra" EntitySet="DevolucionCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Devolucio__ID_Ve__5BE2A6F2" Association="Self.FK__Devolucio__ID_Ve__5BE2A6F2">
+      <End Role="Venta" EntitySet="Venta" />
+      <End Role="DevolucionVenta" EntitySet="DevolucionVenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lester_pi__ID_Pi__3C69FB99" Association="Self.FK__Lester_pi__ID_Pi__3C69FB99">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="Lester_pieza" EntitySet="Lester_pieza" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pieza__ID_Estado__31EC6D26" Association="Self.FK__Pieza__ID_Estado__31EC6D26">
+      <End Role="Estado_uso" EntitySet="Estado_uso" />
+      <End Role="Pieza" EntitySet="Pieza" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pieza__ID_Provee__30F848ED" Association="Self.FK__Pieza__ID_Provee__30F848ED">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Pieza" EntitySet="Pieza" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pieza__ID_TipoPi__32E0915F" Association="Self.FK__Pieza__ID_TipoPi__32E0915F">
+      <End Role="Tipo_piezas" EntitySet="Tipo_piezas" />
+      <End Role="Pieza" EntitySet="Pieza" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PiezasVeh__ID_Pi__36B12243" Association="Self.FK__PiezasVeh__ID_Pi__36B12243">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="PiezasVehiculos" EntitySet="PiezasVehiculos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PiezasVeh__ID_Ve__35BCFE0A" Association="Self.FK__PiezasVeh__ID_Ve__35BCFE0A">
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+      <End Role="PiezasVehiculos" EntitySet="PiezasVehiculos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Proveedor__ID_Ti__2A4B4B5E" Association="Self.FK__Proveedor__ID_Ti__2A4B4B5E">
+      <End Role="Tipo_proveedor" EntitySet="Tipo_proveedor" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reparacio__ID_Cl__4E88ABD4" Association="Self.FK__Reparacio__ID_Cl__4E88ABD4">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Reparacion" EntitySet="Reparacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sustituto__ID_Pi__398D8EEE" Association="Self.FK__Sustituto__ID_Pi__398D8EEE">
+      <End Role="Pieza" EntitySet="Pieza" />
+      <End Role="Sustituto_piezas" EntitySet="Sustituto_piezas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Venta__ID_Client__48CFD27E" Association="Self.FK__Venta__ID_Client__48CFD27E">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
